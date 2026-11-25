@@ -120,7 +120,8 @@
   .rel-col{flex:1 1 170px; min-width:0; display:flex; flex-direction:column; gap:6px;}
   .rel-col h3{margin:0; font:700 12px 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
   .rchip{display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 12px; border-radius:12px; border:2px solid var(--c); background:var(--tint); text-align:left; font-weight:700; font-size:13px; line-height:1.25;}
-  .rchip .rn{font:700 13px 'JetBrains Mono',monospace; color:var(--ct);}
+  .rchip{min-width:0; overflow-wrap:anywhere; hyphens:auto; -webkit-hyphens:auto;}
+  .rchip .rn{flex:0 0 auto; font:700 13px 'JetBrains Mono',monospace; color:var(--ct);}
   .rchip .rk{margin-left:auto;}
   .d-empty{font-size:14px; color:var(--muted); align-self:center; max-width:760px;}
   .d-empty .t{display:block; color:var(--ink); font:800 18px 'Manrope',sans-serif; margin-bottom:4px;}
@@ -140,12 +141,13 @@
   .row-g{flex:1 1 640px; min-width:0; display:flex; flex-wrap:wrap; gap:16px 24px;}
   .grp{flex:1 1 380px; min-width:0;}
   .grp h3{margin:0 0 8px; font:600 12px 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
-  .tiles{display:grid; grid-template-columns:repeat(auto-fill,minmax(104px,1fr)); gap:8px;}
+  .tiles{display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:8px;}
   .tile{position:relative; display:flex; flex-direction:column; justify-content:space-between; gap:8px; min-height:112px; padding:10px; text-align:left; border-radius:14px; border:2px solid transparent; background:var(--tint); color:var(--ink);}
   .tile .top2{display:flex; align-items:center; justify-content:space-between; gap:4px;}
   .tile .num{display:flex; align-items:center; gap:4px; font:800 20px 'JetBrains Mono',monospace; color:var(--ct);}
   .tile .cr{font:700 11px 'JetBrains Mono',monospace; color:var(--muted);}
-  .tile .nm{font:700 13px/1.25 'Manrope',sans-serif;}
+  .tile{min-width:0;}
+  .tile .nm{font:700 12.5px/1.25 'Manrope',sans-serif; min-width:0; max-width:100%; hyphens:auto; -webkit-hyphens:auto; overflow-wrap:anywhere;}
   .tile .b-ok,.tile .b-fin{display:none;}
   .tile.ok .b-ok,.tile.fin .b-fin{display:block;}
   .tile.ok{background:var(--c); color:var(--on-solid);}
