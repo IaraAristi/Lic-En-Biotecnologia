@@ -19,12 +19,6 @@
     --cic:#4457A5;   /* Integración Curricular */
     --sel:#C7355A;   /* selección / acento */
     --shadow: 0 1px 2px rgba(27,36,30,.06), 0 4px 14px rgba(27,36,30,.06);
-
-    /* Nuevos colores de estado */
-    --st-bloqueada:#8E9993;
-    --st-habilitada:#2563EB; /* Azul vibrante para disponibles */
-    --st-aprobada:#2F6F5E;
-    --st-final:#B9822E;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;}
@@ -61,7 +55,7 @@
   button.btn.danger:hover{border-color:var(--sel); color:var(--sel);}
   input[type=file]{display:none;}
 
-  .legend{display:flex; gap:12px; flex-wrap:wrap; align-items:center; font-size:11.5px; color:var(--muted); margin-left:auto;}
+  .legend{display:flex; gap:14px; flex-wrap:wrap; align-items:center; font-size:11.5px; color:var(--muted); margin-left:auto;}
   .legend .dot{display:inline-block; width:9px; height:9px; border-radius:2px; margin-right:5px; vertical-align:middle;}
 
   .hint{
@@ -85,6 +79,7 @@
   .save-status.ok{color:var(--cfb);}
   .save-status.error{color:var(--sel);}
 
+
   #board{
     position:relative;
     overflow-x:auto; overflow-y:hidden;
@@ -102,7 +97,7 @@
   .card{
     background:var(--surface); border-radius:9px; box-shadow:var(--shadow);
     padding:10px 11px 9px; margin-bottom:12px; cursor:pointer;
-    border:1.5px solid transparent; position:relative; transition:.2s ease;
+    border:1.5px solid transparent; position:relative; transition:.15s;
   }
   .card:hover{transform:translateY(-1px); box-shadow:0 2px 4px rgba(27,36,30,.1), 0 8px 18px rgba(27,36,30,.09);}
   .card .cap{height:5px; border-radius:3px; margin:-10px -11px 8px; }
@@ -112,32 +107,13 @@
   .card .campo-tag{font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.04em;}
   .card .cred{font-family:'IBM Plex Mono',monospace; color:var(--muted);}
 
-  /* ESTADOS DINÁMICOS DE TARJETAS */
-  .card.is-bloqueada {
-    opacity: 0.55;
-    background: #F2F4F2;
-    border-color: #D1D8D2;
-  }
-  .card.is-habilitada {
-    border-color: var(--st-habilitada);
-    box-shadow: 0 0 0 1px var(--st-habilitada), var(--shadow);
-  }
-  .card.is-aprobada {
-    background: #F0F7F0;
-    border-color: var(--st-aprobada);
-    opacity: 1;
-  }
-  .card.is-final {
-    background: #FBF4E7;
-    border-color: var(--st-final);
-    border-style: dashed;
-    opacity: 1;
-  }
-
-  .card.selected{border-color:var(--sel) !important; box-shadow:0 0 0 3px rgba(199,53,90,.2), var(--shadow) !important; opacity:1;}
+  .card.selected{border-color:var(--sel); box-shadow:0 0 0 3px rgba(199,53,90,.15), var(--shadow);}
   .card.pending{border-color:var(--sel); border-style:dashed;}
-  .card.dim{opacity:.25;}
-  .card.related{outline:2px solid var(--sel); outline-offset:1px; opacity:1;}
+  .card.dim{opacity:.32;}
+  .card.related{outline:2px solid var(--sel); outline-offset:1px;}
+
+  .card.is-aprobada{background:#F0F7F0; border-color:rgba(47,111,94,.35);}
+  .card.is-final{background:#FBF4E7; border-color:rgba(185,130,46,.4); border-style:dashed;}
 
   .status-row{display:flex; gap:6px; margin-top:8px; padding-top:7px; border-top:1px dashed var(--line);}
   .status-btn{
@@ -145,8 +121,8 @@
     border:1px solid var(--line); background:var(--bg); color:var(--muted); cursor:pointer; transition:.15s;
   }
   .status-btn:hover{border-color:var(--ink); color:var(--ink);}
-  .status-btn.aprobada.active{background:var(--st-aprobada); border-color:var(--st-aprobada); color:#fff;}
-  .status-btn.final.active{background:var(--st-final); border-color:var(--st-final); color:#fff;}
+  .status-btn.aprobada.active{background:var(--cfb); border-color:var(--cfb); color:#fff;}
+  .status-btn.final.active{background:var(--cfe); border-color:var(--cfe); color:#fff;}
 
   .aca-card{
     width:196px; background:var(--surface); border-radius:9px; box-shadow:var(--shadow);
@@ -172,6 +148,33 @@
   #panel .close{position:absolute; top:16px; right:16px; cursor:pointer; color:var(--muted); font-size:18px; background:none; border:none;}
 
   footer{padding:16px 28px 30px; font-size:11px; color:var(--muted); max-width:820px;}
+
+  /* ---- Cuenta / nube ---- */
+  .auth-bar{display:none; align-items:center; gap:10px; flex-wrap:wrap; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-size:12px;}
+  .auth-bar.show{display:flex;}
+  .auth-user{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink);}
+  .auth-cloud{font-size:11.5px; color:var(--muted);}
+  .auth-cloud.ok{color:var(--cfb);}
+  .auth-cloud.error{color:var(--sel);}
+  .modal-back{position:fixed; inset:0; background:rgba(27,36,30,.45); display:none; align-items:center; justify-content:center; z-index:100; padding:16px;}
+  .modal-back.open{display:flex;}
+  .modal{background:var(--surface); border-radius:12px; box-shadow:0 12px 40px rgba(27,36,30,.25); width:100%; max-width:360px; padding:22px; position:relative;}
+  .modal h3{font-family:'Space Grotesk',sans-serif; font-size:17px; margin:0 0 4px;}
+  .modal p{font-size:12px; color:var(--muted); margin:0 0 14px; line-height:1.45;}
+  .modal .x{position:absolute; top:12px; right:14px; background:none; border:none; font-size:18px; color:var(--muted); cursor:pointer;}
+  .modal input[type=email], .modal input[type=password]{
+    width:100%; font-family:'Inter',sans-serif; font-size:13px; padding:9px 11px; margin-bottom:8px;
+    border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink);
+  }
+  .modal .row{display:flex; gap:8px; margin-top:4px;}
+  .modal .row .btn{flex:1;}
+  .modal .btn.wide{width:100%; margin-bottom:12px;}
+  .modal .sep{display:flex; align-items:center; gap:10px; font-size:11px; color:var(--muted); margin:2px 0 12px;}
+  .modal .sep::before,.modal .sep::after{content:''; flex:1; height:1px; background:var(--line);}
+  .modal .link{background:none; border:none; color:var(--muted); font-size:11.5px; text-decoration:underline; cursor:pointer; padding:8px 0 0;}
+  .modal .msg{font-size:12px; margin-top:10px; min-height:16px; color:var(--muted);}
+  .modal .msg.error{color:var(--sel);}
+  .modal .msg.ok{color:var(--cfb);}
 </style>
 </head>
 <body>
@@ -189,16 +192,20 @@
       <span><span class="dot" style="background:var(--cfb)"></span>Básica</span>
       <span><span class="dot" style="background:var(--cfe)"></span>Específica</span>
       <span><span class="dot" style="background:var(--cic)"></span>Integración</span>
-      <span style="border-left: 1px solid var(--line); padding-left: 8px;"></span>
-      <span><span class="dot" style="background:var(--st-bloqueada)"></span>🔒 Bloqueada</span>
-      <span><span class="dot" style="background:var(--st-habilitada)"></span>🔓 Habilitada</span>
-      <span><span class="dot" style="background:var(--st-final)"></span>⏳ En final</span>
-      <span><span class="dot" style="background:var(--st-aprobada)"></span>✓ Aprobada</span>
+      <span><span class="dot" style="background:#2F6F5E"></span>✓ Aprobada</span>
+      <span><span class="dot" style="background:#B9822E"></span>⏳ En final</span>
     </div>
   </div>
   <div class="hint" id="hint">Hacé clic en una materia para ver qué requiere y qué habilita. Usá ✓ / ⏳ en cada tarjeta para marcar tu estado.</div>
   <div class="progress" id="progress"></div>
   <div class="save-status" id="saveStatus"></div>
+  <div class="auth-bar" id="authBar">
+    <button class="btn primary" id="authLoginBtn">☁ Iniciar sesión para guardar en la nube</button>
+    <span class="auth-user" id="authUser" style="display:none;"></span>
+    <button class="btn" id="authLogoutBtn" style="display:none;">Cerrar sesión</button>
+    <span class="auth-cloud" id="authCloud"></span>
+  </div>
+
 </header>
 
 <div id="board">
@@ -211,8 +218,26 @@
   <div id="panelBody"></div>
 </div>
 
+<div class="modal-back" id="authModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <button class="x" id="authClose" aria-label="Cerrar">✕</button>
+    <h3 id="authTitle">Guardá tu progreso en la nube</h3>
+    <p>Con tu cuenta vas a ver tus materias aprobadas y tus correlativas desde cualquier dispositivo.</p>
+    <button class="btn wide" id="authGoogle">Continuar con Google</button>
+    <div class="sep">o con email</div>
+    <input type="email" id="authEmail" placeholder="Email" autocomplete="email">
+    <input type="password" id="authPass" placeholder="Contraseña (mínimo 6 caracteres)" autocomplete="current-password">
+    <div class="row">
+      <button class="btn primary" id="authSignIn">Ingresar</button>
+      <button class="btn" id="authSignUp">Crear cuenta</button>
+    </div>
+    <button class="link" id="authReset">Olvidé mi contraseña</button>
+    <div class="msg" id="authMsg"></div>
+  </div>
+</div>
+
 <footer>
-  Herramienta generada a partir del Anexo del Plan de Estudios de la Licenciatura en Biotecnología (UNAHUR, Res. 000082, 2025)[cite: 1].
+  Herramienta generada a partir del Anexo del Plan de Estudios de la Licenciatura en Biotecnología (UNAHUR, Res. 000082, 2025).
   Las conexiones sugeridas son un punto de partida editable, no un documento oficial. Guardá tus cambios con "Exportar JSON" antes de cerrar la página.
 </footer>
 
@@ -220,6 +245,7 @@
 const CAMPO_COLOR = { CFC:'var(--cfc)', CFB:'var(--cfb)', CFE:'var(--cfe)', CIC:'var(--cic)' };
 const CAMPO_HEX   = { CFC:'#7C8C94', CFB:'#2F6F5E', CFE:'#B9822E', CIC:'#4457A5' };
 
+// id, código de materia (num en el plan), nombre, año, cuatrimestre (col key), campo, créditos
 const subjects = [
  {id:1, name:'Introducción a la Biotecnología', col:'1-1', campo:'CFE', cred:5},
  {id:2, name:'Matemática I', col:'1-1', campo:'CFB', cred:6},
@@ -321,17 +347,7 @@ let status = {}; // id -> 'aprobada' | 'final'
 const byId = {}; subjects.forEach(s=>byId[s.id]=s);
 const colIndex = {}; COLS.forEach((c,i)=>colIndex[c]=i);
 
-// Evaluación del estado académico de habilitación
-function getSubjectAvailability(id) {
-  if (status[id] === 'aprobada') return 'aprobada';
-  if (status[id] === 'final') return 'final';
-
-  const reqs = edges.filter(e => e[1] === id).map(e => e[0]);
-  if (reqs.length === 0) return 'habilitada';
-
-  const allApproved = reqs.every(reqId => status[reqId] === 'aprobada');
-  return allApproved ? 'habilitada' : 'bloqueada';
-}
+function edgeKey(a,b){ return a+'>'+b; }
 
 function render(){
   const columnsEl = document.getElementById('columns');
@@ -363,7 +379,7 @@ function render(){
     });
     columnsEl.appendChild(colEl);
   });
-
+  // ACA column
   const acaCol = document.createElement('div');
   acaCol.className = 'col';
   acaCol.innerHTML = `<h2>Flexible</h2>
@@ -380,23 +396,17 @@ function toggleStatus(id, kind){
   if(status[id]===undefined) delete status[id];
   applyStatusClasses();
   updateProgress();
-  drawEdges();
-  if(selectedId !== null) showPanel();
   saveState();
 }
 
 function applyStatusClasses(){
   document.querySelectorAll('.card').forEach(card=>{
     const id = Number(card.dataset.id);
-    card.classList.remove('is-aprobada','is-final', 'is-habilitada', 'is-bloqueada');
+    card.classList.remove('is-aprobada','is-final');
     card.querySelectorAll('.status-btn').forEach(b=>b.classList.remove('active'));
-
-    const availability = getSubjectAvailability(id);
-    card.classList.add(`is-${availability}`);
-
     const st = status[id];
-    if(st==='aprobada'){ card.querySelector('.status-btn.aprobada').classList.add('active'); }
-    if(st==='final'){ card.querySelector('.status-btn.final').classList.add('active'); }
+    if(st==='aprobada'){ card.classList.add('is-aprobada'); card.querySelector('.status-btn.aprobada').classList.add('active'); }
+    if(st==='final'){ card.classList.add('is-final'); card.querySelector('.status-btn.final').classList.add('active'); }
   });
 }
 
@@ -404,7 +414,7 @@ function updateProgress(){
   const approvedIds = Object.keys(status).filter(id=>status[id]==='aprobada').map(Number);
   const finalIds = Object.keys(status).filter(id=>status[id]==='final').map(Number);
   const creditsDone = approvedIds.reduce((sum,id)=>sum + (byId[id]?byId[id].cred:0), 0);
-  const totalCredits = subjects.reduce((s,x)=>s+x.cred,0); 
+  const totalCredits = subjects.reduce((s,x)=>s+x.cred,0); // 270 - 30 ACA = base curricular credits
   const pct = Math.round((creditsDone/totalCredits)*100);
   document.getElementById('progress').innerHTML = `
     <span>Aprobadas: <b>${approvedIds.length}</b> / ${subjects.length}</span>
@@ -418,19 +428,20 @@ function onCardClick(id){
   if(editMode){
     if(pendingFrom===null){
       pendingFrom = id;
-      updateHint(`Elegiste <b>${byId[id].name}</b>. Ahora hacé clic en la materia relacionada.`);
+      updateHint(`Elegiste <b>${byId[id].name}</b>. Ahora hacé clic en la materia relacionada (se conectará de la más temprana a la más tardía).`);
       applyClasses();
       return;
     }
     if(pendingFrom===id){
       pendingFrom = null;
-      updateHint('Selección cancelada. Modo edición activo.');
+      updateHint('Selección cancelada. Modo edición activo: elegí dos materias para conectar.');
       applyClasses();
       return;
     }
     let a = pendingFrom, b = id;
     const ca = colIndex[byId[a].col], cb = colIndex[byId[b].col];
     if(ca === cb){
+      // same quatrimester: order by numeric id as tiebreaker, still allowed
       if(a>b){ const t=a; a=b; b=t; }
     } else if(ca > cb){
       const t=a; a=b; b=t;
@@ -441,11 +452,10 @@ function onCardClick(id){
       updateHint(`Conexión eliminada: <b>${byId[a].name} → ${byId[b].name}</b>.`);
     } else {
       edges.push([a,b]);
-      updateHint(`Conexión creada: <b>${byId[a].name} → ${byId[b].name}</b>.`);
+      updateHint(`Conexión creada: <b>${byId[a].name} → ${byId[b].name}</b> (la primera es correlativa de la segunda).`);
     }
     pendingFrom = null;
     applyClasses();
-    applyStatusClasses();
     drawEdges();
     saveState();
     return;
@@ -500,17 +510,10 @@ function drawEdges(){
     const y2 = rb.top + rb.height/2 - boardRect.top + board.scrollTop;
     const dx = Math.max(30, (x2-x1)*0.5);
 
-    let opacity = 0.35, strokeW = 1.4, color = CAMPO_HEX[byId[a].campo];
-    
-    // Si la materia origen está aprobada, resaltamos la línea de correlatividad
-    if(status[a] === 'aprobada'){
-      opacity = 0.75;
-      strokeW = 1.8;
-    }
-
+    let opacity = 0.4, strokeW = 1.4, color = CAMPO_HEX[byId[a].campo];
     if(selectedId!==null && !editMode){
-      if(a===selectedId || b===selectedId){ opacity = 0.95; strokeW = 2.4; }
-      else { opacity = 0.05; }
+      if(a===selectedId || b===selectedId){ opacity = 0.95; strokeW = 2.3; color = CAMPO_HEX[byId[a].campo]; }
+      else { opacity = 0.06; }
     }
     const path = document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('d', `M ${x1} ${y1} C ${x1+dx} ${y1}, ${x2-dx} ${y2}, ${x2} ${y2}`);
@@ -532,40 +535,27 @@ function showPanel(){
   if(selectedId===null){ panel.classList.remove('open'); return; }
   const s = byId[selectedId];
   const {reqs, unlocks} = relatedIds(selectedId);
-  const availability = getSubjectAvailability(selectedId);
-  
-  const statusLabels = {
-    'aprobada': '✓ Aprobada',
-    'final': '⏳ En final',
-    'habilitada': '🔓 Habilitada para cursar',
-    'bloqueada': '🔒 Bloqueada'
-  };
-
   const panelBody = document.getElementById('panelBody');
   panelBody.innerHTML = `
     <h3>${s.name}</h3>
     <div class="pcode mono">UC-${String(s.id).padStart(2,'0')} · ${COL_LABELS[s.col]}</div>
-    <div class="row"><span>Estado</span><b>${statusLabels[availability]}</b></div>
     <div class="row"><span>Campo</span><span style="color:${CAMPO_HEX[s.campo]}">${s.campo}</span></div>
     <div class="row"><span>Créditos</span><span>${s.cred}</span></div>
     <h4>Requiere (correlativas previas)</h4>
     <ul id="reqList"></ul>
-    <h4>Habilita (materias futuras)</h4>
+    <h4>Habilita (materias que la tienen como correlativa)</h4>
     <ul id="unlockList"></ul>
   `;
   const reqList = document.getElementById('reqList');
   const unlockList = document.getElementById('unlockList');
-  
-  if(reqs.length===0) reqList.innerHTML = '<div class="empty">Sin correlativas previas.</div>';
+  if(reqs.length===0) reqList.innerHTML = '<div class="empty">Sin correlativas previas cargadas.</div>';
   else reqs.forEach(id=>{
     const li = document.createElement('li');
-    const isOk = status[id] === 'aprobada' ? '✓' : '✗';
-    li.textContent = `${isOk} UC-${String(id).padStart(2,'0')} · ${byId[id].name}`;
+    li.textContent = `UC-${String(id).padStart(2,'0')} · ${byId[id].name}`;
     li.addEventListener('click', ()=>{ selectedId = id; applyClasses(); drawEdges(); showPanel(); });
     reqList.appendChild(li);
   });
-
-  if(unlocks.length===0) unlockList.innerHTML = '<div class="empty">No habilita otras materias.</div>';
+  if(unlocks.length===0) unlockList.innerHTML = '<div class="empty">No habilita otras materias en este borrador.</div>';
   else unlocks.forEach(id=>{
     const li = document.createElement('li');
     li.textContent = `UC-${String(id).padStart(2,'0')} · ${byId[id].name}`;
@@ -594,7 +584,6 @@ document.getElementById('editToggle').addEventListener('click', (e)=>{
 document.getElementById('resetBtn').addEventListener('click', ()=>{
   if(confirm('¿Restablecer el mapa a las correlativas validadas? Se perderán tus ediciones actuales.')){
     edges = DRAFT_EDGES.map(e=>e.slice());
-    applyStatusClasses();
     drawEdges();
     updateHint('Mapa restablecido a las correlativas validadas.');
     saveState();
@@ -604,7 +593,6 @@ document.getElementById('resetBtn').addEventListener('click', ()=>{
 document.getElementById('clearBtn').addEventListener('click', ()=>{
   if(confirm('¿Vaciar todas las conexiones? Podés reconstruirlas manualmente en modo edición.')){
     edges = [];
-    applyStatusClasses();
     drawEdges();
     updateHint('Se vaciaron todas las conexiones.');
     saveState();
@@ -687,6 +675,7 @@ async function saveState(){
         await window.storage.set(STORAGE_KEY, payload, false);
         showSaveStatus('ok');
       }catch(err){
+        // si falla el storage de Claude, probamos localStorage como respaldo
         if(localStorageAvailable){
           try{ window.localStorage.setItem(LOCAL_KEY, payload); showSaveStatus('ok-local'); }
           catch(e2){ showSaveStatus('error'); }
@@ -700,6 +689,7 @@ async function saveState(){
     } else {
       showSaveStatus('unavailable');
     }
+    if(window.cloudPush) window.cloudPush();
   }, 300);
 }
 
@@ -708,16 +698,26 @@ async function loadState(){
     try{
       const res = await window.storage.get(STORAGE_KEY, false);
       if(res && res.value) return JSON.parse(res.value);
-    }catch(err){ }
+    }catch(err){ /* no guardado previo en Claude */ }
   }
   if(localStorageAvailable){
     try{
       const raw = window.localStorage.getItem(LOCAL_KEY);
       if(raw) return JSON.parse(raw);
-    }catch(err){ }
+    }catch(err){ /* no guardado previo local */ }
   }
   return null;
 }
+
+window.getLocalState = ()=>({edges, status});
+window.applyCloudState = (data)=>{
+  edges = data.edges;
+  status = (data.status && typeof data.status==='object') ? data.status : {};
+  selectedId = null; pendingFrom = null;
+  document.getElementById('panel').classList.remove('open');
+  render();
+  try{ if(localStorageAvailable) window.localStorage.setItem(LOCAL_KEY, JSON.stringify({edges, status})); }catch(e){}
+};
 
 async function init(){
   const saved = await loadState();
@@ -733,6 +733,172 @@ async function init(){
 }
 
 init();
+</script>
+
+<script type="module">
+/* =====================================================================
+   CONFIGURACIÓN DE FIREBASE
+   Pegá acá los datos de tu proyecto (Configuración del proyecto → Tus apps → App web).
+   Mientras tengan "TU_..." la app funciona igual, pero sin la opción de cuenta.
+   ===================================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyB35l4kFghRvBV3EaZLL7m06pr6xfSBCOY",
+  authDomain: "mapa-biotecnologia.firebaseapp.com",
+  projectId: "mapa-biotecnologia",
+  storageBucket: "mapa-biotecnologia.firebasestorage.app",
+  messagingSenderId: "156610804737",
+  appId: "1:156610804737:web:5c8dd4ccb1f66bc8635400"
+};
+
+
+
+if (firebaseConfig.apiKey.startsWith('TU_')) {
+  console.info('Firebase sin configurar: la app guarda solo en este navegador.');
+} else {
+  const V = '10.14.1';
+  const [{ initializeApp }, A, F] = await Promise.all([
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-app.js`),
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-auth.js`),
+    import(`https://www.gstatic.com/firebasejs/${V}/firebase-firestore.js`)
+  ]);
+
+  const app = initializeApp(firebaseConfig);
+  const auth = A.getAuth(app);
+  const db = F.getFirestore(app);
+
+  const $ = id => document.getElementById(id);
+  const bar = $('authBar'), modal = $('authModal'), msg = $('authMsg'), cloud = $('authCloud');
+  bar.classList.add('show');
+
+  let user = null;
+  let lastSynced = null;   // JSON del último estado que coincide con la nube
+  let pushTimer = null;
+
+  const setCloud = (text, kind) => { cloud.textContent = text; cloud.className = 'auth-cloud' + (kind ? ' ' + kind : ''); };
+  const setMsg = (text, kind) => { msg.textContent = text; msg.className = 'msg' + (kind ? ' ' + kind : ''); };
+  const openModal = () => { setMsg(''); modal.classList.add('open'); };
+  const closeModal = () => modal.classList.remove('open');
+
+  const ERRORES = {
+    'auth/invalid-credential': 'Email o contraseña incorrectos.',
+    'auth/wrong-password': 'Email o contraseña incorrectos.',
+    'auth/user-not-found': 'No hay una cuenta con ese email. Probá "Crear cuenta".',
+    'auth/email-already-in-use': 'Ese email ya tiene cuenta. Probá "Ingresar".',
+    'auth/weak-password': 'La contraseña es muy corta (mínimo 6 caracteres).',
+    'auth/invalid-email': 'El email no es válido.',
+    'auth/missing-password': 'Escribí tu contraseña.',
+    'auth/popup-closed-by-user': 'Cerraste la ventana de Google antes de terminar.',
+    'auth/cancelled-popup-request': 'Se canceló el ingreso con Google.',
+    'auth/popup-blocked': 'El navegador bloqueó la ventana de Google. Permitila e intentá de nuevo.',
+    'auth/unauthorized-domain': 'Este dominio no está autorizado en Firebase (Authentication → Configuración → Dominios autorizados).',
+    'auth/operation-not-allowed': 'Ese método de ingreso no está activado en Firebase (Authentication → Sign-in method).',
+    'auth/too-many-requests': 'Demasiados intentos. Esperá un rato y probá de nuevo.',
+    'auth/network-request-failed': 'Sin conexión. Revisá tu internet.'
+  };
+  const errText = e => ERRORES[e && e.code] || ('No se pudo completar la acción (' + ((e && e.code) || 'error') + ').');
+
+  const docRef = () => F.doc(db, 'usuarios', user.uid);
+  const snapshot = () => JSON.stringify(window.getLocalState());
+
+  async function pullOrInit() {
+    setCloud('Conectando con tu cuenta…');
+    try {
+      const snap = await F.getDoc(docRef());
+      const local = snapshot();
+      if (snap.exists() && typeof snap.data().data === 'string') {
+        const remote = JSON.parse(snap.data().data);
+        if (Array.isArray(remote.edges)) {
+          const remoteStr = JSON.stringify({ edges: remote.edges, status: remote.status || {} });
+          if (remoteStr !== local) {
+            const localHasProgress = Object.keys(window.getLocalState().status).length > 0;
+            const useRemote = !localHasProgress ||
+              confirm('Este dispositivo tiene cambios distintos a los de tu cuenta.\n\nAceptar = usar los de tu cuenta (se reemplaza lo de acá).\nCancelar = subir lo de este dispositivo y reemplazar lo de tu cuenta.');
+            if (useRemote) {
+              window.applyCloudState(remote);
+              lastSynced = JSON.stringify({ edges: remote.edges, status: remote.status || {} });
+              setCloud('● Cuenta sincronizada', 'ok');
+              return;
+            }
+            await pushNow();
+            return;
+          }
+          lastSynced = remoteStr;
+          setCloud('● Cuenta sincronizada', 'ok');
+          return;
+        }
+      }
+      await pushNow(); // primera vez: subimos lo que hay en este dispositivo
+    } catch (e) {
+      setCloud('⚠ No se pudo leer tu cuenta (' + ((e && e.code) || 'error') + ')', 'error');
+    }
+  }
+
+  async function pushNow() {
+    if (!user) return;
+    const s = snapshot();
+    if (s === lastSynced) return;
+    try {
+      setCloud('Guardando en tu cuenta…');
+      await F.setDoc(docRef(), { data: s, updatedAt: F.serverTimestamp() });
+      lastSynced = s;
+      setCloud('● Guardado en tu cuenta', 'ok');
+    } catch (e) {
+      setCloud('⚠ No se pudo guardar en la nube (' + ((e && e.code) || 'error') + '). Tus cambios siguen en este navegador.', 'error');
+    }
+  }
+
+  // Lo llama saveState() de la app principal después de cada cambio
+  window.cloudPush = () => {
+    if (!user) return;
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(pushNow, 700);
+  };
+
+  A.onAuthStateChanged(auth, async u => {
+    user = u;
+    if (u) {
+      $('authLoginBtn').style.display = 'none';
+      $('authUser').style.display = 'inline';
+      $('authUser').textContent = u.email || 'Cuenta de Google';
+      $('authLogoutBtn').style.display = 'inline-block';
+      closeModal();
+      await pullOrInit();
+    } else {
+      lastSynced = null;
+      $('authLoginBtn').style.display = 'inline-block';
+      $('authUser').style.display = 'none';
+      $('authLogoutBtn').style.display = 'none';
+      setCloud('');
+    }
+  });
+
+  $('authLoginBtn').addEventListener('click', openModal);
+  $('authClose').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  $('authLogoutBtn').addEventListener('click', () => A.signOut(auth));
+
+  $('authGoogle').addEventListener('click', async () => {
+    setMsg('Abriendo Google…');
+    try { await A.signInWithPopup(auth, new A.GoogleAuthProvider()); }
+    catch (e) { setMsg(errText(e), 'error'); }
+  });
+  $('authSignIn').addEventListener('click', async () => {
+    setMsg('Ingresando…');
+    try { await A.signInWithEmailAndPassword(auth, $('authEmail').value.trim(), $('authPass').value); }
+    catch (e) { setMsg(errText(e), 'error'); }
+  });
+  $('authSignUp').addEventListener('click', async () => {
+    setMsg('Creando cuenta…');
+    try { await A.createUserWithEmailAndPassword(auth, $('authEmail').value.trim(), $('authPass').value); }
+    catch (e) { setMsg(errText(e), 'error'); }
+  });
+  $('authReset').addEventListener('click', async () => {
+    const email = $('authEmail').value.trim();
+    if (!email) { setMsg('Escribí tu email arriba y volvé a tocar "Olvidé mi contraseña".', 'error'); return; }
+    try { await A.sendPasswordResetEmail(auth, email); setMsg('Te enviamos un mail para restablecer la contraseña.', 'ok'); }
+    catch (e) { setMsg(errText(e), 'error'); }
+  });
+}
 </script>
 </body>
 </html>
