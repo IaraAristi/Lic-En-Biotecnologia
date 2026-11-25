@@ -105,10 +105,25 @@
   .cf[aria-pressed="true"]{border-color:var(--ink);}
   .cf .bar{height:8px; border-radius:4px; background:var(--line); overflow:hidden; margin-top:auto;}
   .cf .bar span{display:block; height:100%; background:var(--c); border-radius:4px;}
+  .cf.acacard{--c:var(--ink); border-style:dashed;}
 
+  /* Filtro por estado */
+  .flt{display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
+  .flt .lab{font:700 12px 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-right:4px;}
+  .fbtn{min-height:44px; padding:0 14px; border-radius:999px; border:2px solid var(--line); background:var(--surface); display:flex; align-items:center; gap:8px; font-weight:700; font-size:13px;}
+  .fbtn .cnt{font:700 12px 'JetBrains Mono',monospace; color:var(--muted);}
+  .fbtn[aria-pressed="true"]{border-color:var(--ink);}
+  .sw{display:inline-block; width:16px; height:16px; border-radius:5px; flex:0 0 16px;}
+  .sw.todas{background:conic-gradient(#0B7A6C 0 25%,#B45309 0 50%,#4F46E5 0 75%,#52607A 0);}
+  .sw.ap{background:var(--ink);}
+  .sw.fin{border:2px dashed var(--ink); background:var(--surface);}
+  .sw.libre{border:2px solid var(--ink); background:var(--surface);}
+  .sw.bloq{border:2px dotted var(--muted); background:repeating-linear-gradient(135deg,transparent 0 3px,var(--line) 3px 4px);}
+
+  /* Panel de detalle (solo con una materia elegida) */
   .detail{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:18px 22px; min-height:150px; display:flex; flex-wrap:wrap; gap:16px 32px; align-items:flex-start;}
   body.editing .detail{border:2px dashed var(--ink);}
-  .d-main{flex:1 1 360px; min-width:0; display:flex; flex-direction:column; gap:10px;}
+  .d-main{flex:1 1 340px; min-width:0; display:flex; flex-direction:column; gap:10px;}
   .d-code{font:600 12px 'JetBrains Mono',monospace; color:var(--muted);}
   .d-main h2{margin:0; font:800 24px/1.15 'Manrope',sans-serif; letter-spacing:-.4px;}
   .d-pill{align-self:flex-start; display:inline-flex; padding:4px 10px; border-radius:8px; background:var(--tint); color:var(--ct); font:700 12px 'JetBrains Mono',monospace;}
@@ -116,13 +131,30 @@
   .sb3 button{min-height:44px; padding:0 16px; border:0; border-right:1px solid var(--line); background:transparent; font-weight:700; font-size:13px;}
   .sb3 button:last-child{border-right:0;}
   .sb3 button[aria-pressed="true"]{background:var(--ink); color:var(--bg);}
-  .d-rel{flex:1 1 380px; min-width:0; display:flex; flex-wrap:wrap; gap:14px 28px;}
-  .rel-col{flex:1 1 170px; min-width:0; display:flex; flex-direction:column; gap:6px;}
+  .av{display:flex; flex-direction:column; gap:6px; padding:12px 14px; border-radius:12px; border:2px solid var(--ink);}
+  .av .avt{display:flex; align-items:center; gap:8px; font:800 15px 'Manrope',sans-serif;}
+  .av .avd{font-size:13px; color:var(--muted);}
+  .av.libre{background:var(--ink); color:var(--bg);}
+  .av.libre .avd{color:var(--bg); opacity:.85;}
+  .av.bloq{border-style:dotted; border-color:var(--muted); background:repeating-linear-gradient(135deg,transparent 0 6px,var(--line) 6px 7px);}
+  .av.ap{border-color:var(--ok-text); color:var(--ok-text);}
+  .av.fin{border-style:dashed;}
+  .segs{display:flex; gap:4px;}
+  .segs i{display:block; flex:1; height:8px; border-radius:4px; background:var(--line); max-width:44px;}
+  .segs i.on{background:var(--ink);}
+  .d-rel{flex:1 1 440px; min-width:0; display:flex; flex-wrap:wrap; gap:14px 24px;}
+  .rel-col{flex:1 1 200px; min-width:0; display:flex; flex-direction:column; gap:6px;}
   .rel-col h3{margin:0; font:700 12px 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
-  .rchip{display:flex; align-items:center; gap:8px; min-height:44px; padding:4px 12px; border-radius:12px; border:2px solid var(--c); background:var(--tint); text-align:left; font-weight:700; font-size:13px; line-height:1.25;}
-  .rchip{min-width:0; overflow-wrap:anywhere; hyphens:auto; -webkit-hyphens:auto;}
+  .rchip{display:flex; align-items:center; gap:10px; min-height:52px; min-width:0; padding:6px 12px; border-radius:12px; border:2px solid var(--c); background:var(--tint); text-align:left; overflow-wrap:anywhere; hyphens:auto; -webkit-hyphens:auto;}
   .rchip .rn{flex:0 0 auto; font:700 13px 'JetBrains Mono',monospace; color:var(--ct);}
-  .rchip .rk{margin-left:auto;}
+  .rchip .rtxt{display:flex; flex-direction:column; min-width:0;}
+  .rchip .rname{font-weight:700; font-size:13px; line-height:1.25;}
+  .rchip .rst{font:700 12px 'JetBrains Mono',monospace; color:var(--muted);}
+  .rchip.miss{background:var(--surface); border:2px dashed var(--ink);}
+  .rchip.miss .rst{color:var(--ink);}
+  .rchip.free{background:var(--surface); border:2px solid var(--ink);}
+  .rchip.free .rst{color:var(--ok-text);}
+  .rchip.wait{background:var(--surface); border:2px dotted var(--muted);}
   .d-empty{font-size:14px; color:var(--muted); align-self:center; max-width:760px;}
   .d-empty .t{display:block; color:var(--ink); font:800 18px 'Manrope',sans-serif; margin-bottom:4px;}
   .d-empty b{color:var(--ink);}
@@ -130,6 +162,7 @@
   .btn{min-height:44px; padding:0 16px; border-radius:12px; border:1px solid var(--line); background:var(--bg); font-weight:700;}
   .btn.primary{background:var(--ink); border-color:var(--ink); color:var(--bg);}
   .btn.google{border:2px solid var(--ink);}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
 
   /* ---------- Filas por año ---------- */
   .row{display:flex; flex-wrap:wrap; gap:12px 20px; padding-top:4px;}
@@ -142,25 +175,52 @@
   .grp{flex:1 1 380px; min-width:0;}
   .grp h3{margin:0 0 8px; font:600 12px 'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.06em; color:var(--muted);}
   .tiles{display:grid; grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:8px;}
-  .tile{position:relative; display:flex; flex-direction:column; justify-content:space-between; gap:8px; min-height:112px; padding:10px; text-align:left; border-radius:14px; border:2px solid transparent; background:var(--tint); color:var(--ink);}
+  .tile{position:relative; display:flex; flex-direction:column; justify-content:space-between; gap:6px; min-height:128px; min-width:0; padding:10px; text-align:left; border-radius:14px; border:2px solid transparent; background:var(--tint); color:var(--ink);}
   .tile .top2{display:flex; align-items:center; justify-content:space-between; gap:4px;}
-  .tile .num{display:flex; align-items:center; gap:4px; font:800 20px 'JetBrains Mono',monospace; color:var(--ct);}
-  .tile .cr{font:700 11px 'JetBrains Mono',monospace; color:var(--muted);}
-  .tile{min-width:0;}
+  .tile .num{font:800 20px 'JetBrains Mono',monospace; color:var(--ct);}
+  .tile .ic{display:flex; color:var(--ct);}
+  .tile .ic svg{display:none;}
+  .tile.ap .ic .b-ap,.tile.fin .ic .b-fin,.tile.libre .ic .b-libre,.tile.bloq .ic .b-bloq{display:block;}
+  .tile .tag{font:700 11px 'JetBrains Mono',monospace; color:var(--muted); margin-top:-2px;}
   .tile .nm{font:700 12.5px/1.25 'Manrope',sans-serif; min-width:0; max-width:100%; hyphens:auto; -webkit-hyphens:auto; overflow-wrap:anywhere;}
-  .tile .b-ok,.tile .b-fin{display:none;}
-  .tile.ok .b-ok,.tile.fin .b-fin{display:block;}
-  .tile.ok{background:var(--c); color:var(--on-solid);}
-  .tile.ok .num,.tile.ok .cr{color:var(--on-solid);}
+  .tile.ap{background:var(--c); color:var(--on-solid);}
+  .tile.ap .num,.tile.ap .tag,.tile.ap .ic{color:var(--on-solid);}
   .tile.fin{background:var(--surface); border:2px dashed var(--c);}
+  .tile.libre{border:2px solid var(--c);}
+  .tile.libre .tag{color:var(--ct);}
+  .tile.bloq{background:var(--surface) repeating-linear-gradient(135deg,transparent 0 6px,var(--line) 6px 7px); border:2px dotted var(--muted); color:var(--muted);}
+  .tile.bloq .num,.tile.bloq .ic{color:var(--muted);}
   .tile.prev{border:2px dashed var(--ink);}
   .tile.unl{border:2px solid var(--ink);}
+  .tile.frees{border:2px solid var(--ink); box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--ink);}
+  .tile.frees .tag{color:var(--ink);}
   .tile.sel{outline:4px solid var(--ink); outline-offset:2px;}
   .tile.pending{outline:4px dashed var(--ink); outline-offset:2px;}
   .tile.dim{opacity:.28;}
   @media (prefers-reduced-motion:no-preference){ .tile{transition:opacity .15s;} }
-  .aca{min-height:112px; border:2px dashed var(--line); border-radius:14px; padding:14px; color:var(--muted); font-size:13px;}
-  .aca b{display:block; color:var(--ink); font:800 16px 'Manrope',sans-serif; margin-bottom:4px;}
+
+  /* ---------- Flexible (ACA) ---------- */
+  .acabox{border:2px solid var(--line); border-radius:14px; background:var(--surface); padding:14px; display:flex; flex-direction:column; gap:12px;}
+  .aca-h b{display:block; font:800 16px 'Manrope',sans-serif; margin-bottom:2px;}
+  .aca-h span{font-size:13px; color:var(--muted);}
+  .aca-n{font:800 30px/1.1 'JetBrains Mono',monospace;}
+  .aca-n small{font:600 13px 'JetBrains Mono',monospace; color:var(--muted);}
+  .bar2{height:10px; border-radius:5px; background:var(--line); overflow:hidden; margin:6px 0 4px;}
+  .bar2 span{display:block; height:100%; background:var(--ink); border-radius:5px;}
+  .aca-s{font:600 12px 'JetBrains Mono',monospace; color:var(--muted);}
+  .aca-list{display:flex; flex-direction:column; gap:6px;}
+  .aca-item{display:flex; align-items:center; gap:10px; min-height:52px; padding:4px 4px 4px 12px; border:1px solid var(--line); border-radius:12px; background:var(--bg);}
+  .aca-nm{flex:1; min-width:0; font-weight:700; font-size:13px; overflow-wrap:anywhere;}
+  .aca-cr{flex:0 0 auto; padding:4px 8px; border-radius:8px; border:1px solid var(--line); background:var(--surface); font:700 12px 'JetBrains Mono',monospace;}
+  .aca-del{width:44px; height:44px; flex:0 0 44px; border:0; background:transparent; display:grid; place-items:center; color:var(--muted); border-radius:10px;}
+  .aca-del:hover{color:var(--danger);}
+  .aca-add{min-height:44px; border:2px dashed var(--ink); border-radius:12px; background:transparent; font-weight:800;}
+  .aca-form{display:flex; flex-direction:column; gap:8px; padding:12px; border-radius:12px; background:var(--bg);}
+  .aca-form label,.aca-form .lbl2{font-size:12px; font-weight:700; color:var(--muted);}
+  .aca-form input{height:44px; padding:0 12px; border-radius:12px; border:1px solid var(--line); background:var(--surface); color:var(--ink); font:inherit;}
+  .stepper{display:flex; align-items:center; gap:10px;}
+  .stepper button{width:44px; height:44px; border-radius:12px; border:1px solid var(--line); background:var(--surface); font:800 20px 'JetBrains Mono',monospace;}
+  .step-n{min-width:36px; text-align:center; font:800 20px 'JetBrains Mono',monospace;}
 
   /* ---------- Modal de cuenta ---------- */
   .overlay{position:fixed; inset:0; background:var(--scrim); display:none; align-items:flex-start; justify-content:center; padding:96px 16px 16px; z-index:100; overflow-y:auto;}
@@ -263,11 +323,19 @@
     <div class="cfs" id="cfs"></div>
   </section>
 
-  <section class="detail" id="detail" aria-live="polite" aria-label="Detalle de la materia"></section>
+  <section class="flt" id="flt" aria-label="Filtrar por estado">
+    <span class="lab">Estado</span>
+    <button type="button" class="fbtn" data-state="" aria-pressed="true"><span class="sw todas"></span>Todas<span class="cnt" data-cnt=""></span></button>
+    <button type="button" class="fbtn" data-state="libre" aria-pressed="false"><span class="sw libre"></span>Habilitadas<span class="cnt" data-cnt="libre"></span></button>
+    <button type="button" class="fbtn" data-state="bloq" aria-pressed="false"><span class="sw bloq"></span>Bloqueadas<span class="cnt" data-cnt="bloq"></span></button>
+    <button type="button" class="fbtn" data-state="fin" aria-pressed="false"><span class="sw fin"></span>En final<span class="cnt" data-cnt="fin"></span></button>
+    <button type="button" class="fbtn" data-state="ap" aria-pressed="false"><span class="sw ap"></span>Aprobadas<span class="cnt" data-cnt="ap"></span></button>
+  </section>
+
+  <section class="detail" id="detail" aria-live="polite" aria-label="Detalle de la materia" hidden></section>
 
   <div id="board"></div>
 </main>
-
 </div>
 
 <div class="toast" id="toast" role="status" hidden></div>
@@ -296,9 +364,9 @@
 
 <script>
 const CAMPOS = { CFC:'Formación Común', CFB:'Formación Básica', CFE:'Formación Específica', CIC:'Integración Curricular' };
-const CAMPO_SHORT = { CFC:'Común', CFB:'Básica', CFE:'Específica', CIC:'Integración' };
+const ACA_GOAL = 30;
 
-// id, nombre, año-cuatrimestre, campo, créditos (los créditos ya no se muestran: el progreso se cuenta en materias)
+// id, nombre, año-cuatrimestre, campo, créditos (los créditos de las materias no se muestran: el progreso se cuenta en materias)
 const subjects = [
   [1,'Introducción a la Biotecnología','1-1','CFE',5],[2,'Matemática I','1-1','CFB',6],[3,'Biología General','1-1','CFB',7],
   [4,'Introducción a la Química','1-1','CFB',6],[5,'Cultura y alfabetización digital','1-1','CFC',4],
@@ -359,7 +427,11 @@ let editHint = '';
 let pendingFrom = null;
 let selectedId = null;
 let campoFilter = '';
-let status = {}; // id -> 'aprobada' | 'final'
+let stateFilter = '';
+let status = {}; // id -> 'aprobada' | 'final'   (una materia en final cuenta como aprobada)
+let aca = [];    // actividades flexibles: [{id, name, cred}]
+let acaFormOpen = false;
+const acaDraft = {name:'', cred:2};
 
 const byId = {}; subjects.forEach(s => byId[s.id] = s);
 const colIndex = {}; COLS.forEach((c,i) => colIndex[c] = i);
@@ -369,16 +441,34 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 const yearOf = s => Number(s.col[0]);
 const cuatOf = s => Number(s.col[2]);
 
+const ICONS = {
+  ap:'<path d="M20 6 9 17l-5-5"/>',
+  fin:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  libre:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/>',
+  bloq:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'
+};
+const icon = (k, size, sw, cls) => `<svg ${cls ? `class="${cls}" ` : ''}width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k]}</svg>`;
+
+/* ---------- Relaciones y estados derivados ---------- */
+const reqsOf = id => edges.filter(e => e[1]===id).map(e => e[0]);
+const unlOf  = id => edges.filter(e => e[0]===id).map(e => e[1]);
+// previas que todavía no cuentan: ni aprobadas ni en final
+const missingOf = id => reqsOf(id).filter(r => !status[r]);
+// ap = aprobada · fin = en final · libre = habilitada para cursar · bloq = bloqueada
+function kindOf(id){
+  if(status[id]==='aprobada') return 'ap';
+  if(status[id]==='final') return 'fin';
+  return missingOf(id).length===0 ? 'libre' : 'bloq';
+}
+
 /* ---------- Construcción del tablero (una sola vez) ---------- */
 function tileHtml(s){
   return `<button class="tile c-${s.campo}" type="button" data-id="${s.id}">
     <span class="top2">
-      <span class="num">${pad(s.id)}
-        <svg class="b-ok" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        <svg class="b-fin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-      </span>
-      <span class="cr"></span>
+      <span class="num">${pad(s.id)}</span>
+      <span class="ic">${['ap','fin','libre','bloq'].map(k => icon(k, 18, 2.8, 'b-'+k)).join('')}</span>
     </span>
+    <span class="tag"></span>
     <span class="nm">${esc(s.name)}</span>
   </button>`;
 }
@@ -395,7 +485,7 @@ function buildBoard(){
       html += `<div class="grp"><h3>Cuatrimestre ${c}</h3><div class="tiles">${items.map(tileHtml).join('')}</div></div>`;
     });
     if(y === 5){
-      html += `<div class="grp"><h3>Flexible</h3><div class="aca"><b>ACA · 30 créditos</b>Actividades Curriculares Acreditables. Sin correlatividad definida; se acreditan a elección a lo largo de la carrera.</div></div>`;
+      html += `<div class="grp"><h3>Flexible</h3><div class="acabox" id="acaBox"></div></div>`;
     }
     html += '</div></section>';
   }
@@ -405,77 +495,95 @@ function buildBoard(){
     `<button class="cf c-${k}" type="button" data-campo="${k}" aria-pressed="false">
       <span class="lbl">${CAMPOS[k]}</span><span class="nums"></span>
       <div class="bar"><span style="width:0%"></span></div>
-    </button>`).join('');
+    </button>`).join('') +
+    `<div class="cf acacard"><span class="lbl">Flexible (ACA)</span><span class="nums" id="acaCardNums"></span><div class="bar"><span id="acaCardBar" style="width:0%"></span></div></div>`;
 }
 
 /* ---------- Actualización de la vista ---------- */
-function relIds(id){
-  return {
-    reqs: edges.filter(e => e[1]===id).map(e => e[0]),
-    unlocks: edges.filter(e => e[0]===id).map(e => e[1])
-  };
-}
-
-function stateLabel(id){
-  return status[id]==='aprobada' ? 'aprobada' : (status[id]==='final' ? 'en final' : 'pendiente');
+function stateText(k, falt){
+  return k==='ap' ? 'aprobada' : k==='fin' ? 'en final' : k==='libre' ? 'habilitada para cursar' : `bloqueada, faltan ${falt} previas`;
 }
 
 function update(){
   const base = editMode ? pendingFrom : selectedId;
-  const rel = base!==null ? relIds(base) : {reqs:[], unlocks:[]};
+  const reqs = base!==null ? reqsOf(base) : [];
+  const unl = base!==null ? unlOf(base) : [];
+  const baseDone = base!==null && !!status[base];
+  // materias que quedan libres al aprobar la elegida (solo si todavía no cuenta como aprobada)
+  const freed = (!editMode && base!==null && !baseDone)
+    ? unl.filter(u => !status[u] && missingOf(u).filter(r => r!==base).length===0)
+    : [];
+
   document.querySelectorAll('.tile').forEach(t => {
-    const id = Number(t.dataset.id), s = byId[id], st = status[id];
-    const isSel = id===base, isReq = rel.reqs.includes(id), isUnl = rel.unlocks.includes(id);
-    let cls = 'tile c-' + s.campo;
-    if(st==='aprobada') cls += ' ok';
-    if(st==='final') cls += ' fin';
+    const id = Number(t.dataset.id), s = byId[id], k = kindOf(id);
+    const isSel = id===base, isReq = reqs.includes(id), isUnl = unl.includes(id), isFreed = freed.includes(id);
+    let cls = 'tile c-' + s.campo + ' ' + k;
     if(isSel) cls += editMode ? ' pending' : ' sel';
     else if(isReq) cls += ' prev';
+    else if(isFreed) cls += ' frees';
     else if(isUnl) cls += ' unl';
     const related = isSel || isReq || isUnl;
-    if((!editMode && base!==null && !related) || (campoFilter && s.campo!==campoFilter)) cls += ' dim';
+    if((!editMode && base!==null && !related) || (campoFilter && s.campo!==campoFilter) || (stateFilter && stateFilter!==k)) cls += ' dim';
     t.className = cls;
-    t.querySelector('.cr').textContent = isSel ? (editMode ? 'ORIGEN' : 'ELEGIDA') : isReq ? 'PREVIA' : isUnl ? 'HABILITA' : s.campo;
+    const falt = missingOf(id).length;
+    t.querySelector('.tag').textContent =
+      isSel ? (editMode ? 'ORIGEN' : 'ELEGIDA') :
+      isReq ? 'PREVIA' : isFreed ? 'SE LIBERA' : isUnl ? 'HABILITA' :
+      k==='libre' ? 'LIBRE' : k==='bloq' ? 'FALTAN ' + falt : s.campo;
     t.setAttribute('aria-pressed', String(isSel));
-    t.setAttribute('aria-label', `${s.name}, ${CAMPOS[s.campo]}, ${stateLabel(id)}`);
+    t.setAttribute('aria-label', `${s.name}, ${CAMPOS[s.campo]}, ${stateText(k, falt)}`);
   });
   updateProgress();
-  renderDetail();
+  renderDetail(freed);
 }
 
 function updateProgress(){
   const total = subjects.length;
-  const ap = subjects.filter(s => status[s.id]==='aprobada').length;
-  const fin = subjects.filter(s => status[s.id]==='final').length;
-  $('bigPct').textContent = Math.round(ap/total*100) + '%';
-  $('bigSub').textContent = `${ap} de ${total} materias · ${fin} en final`;
+  const kinds = {};
+  subjects.forEach(s => kinds[s.id] = kindOf(s.id));
+  const count = k => subjects.filter(s => kinds[s.id]===k).length;
+  const done = count('ap') + count('fin'); // una materia en final cuenta como aprobada
+  $('bigPct').textContent = Math.round(done/total*100) + '%';
+  $('bigSub').textContent = `${done} de ${total} materias · ${count('libre')} habilitadas para cursar`;
 
-  document.querySelectorAll('.cf').forEach(b => {
+  document.querySelectorAll('.cf[data-campo]').forEach(b => {
     const k = b.dataset.campo;
     const items = subjects.filter(s => s.campo===k);
-    const done = items.filter(s => status[s.id]==='aprobada').length;
-    b.querySelector('.nums').textContent = `${done} / ${items.length} materias`;
-    b.querySelector('.bar span').style.width = (items.length ? Math.round(done/items.length*100) : 0) + '%';
+    const d = items.filter(s => status[s.id]).length;
+    b.querySelector('.nums').textContent = `${d} / ${items.length} materias`;
+    b.querySelector('.bar span').style.width = (items.length ? Math.round(d/items.length*100) : 0) + '%';
     b.setAttribute('aria-pressed', String(campoFilter===k));
   });
 
   for(let y=1; y<=5; y++){
     const items = subjects.filter(s => yearOf(s)===y);
-    const done = items.filter(s => status[s.id]==='aprobada').length;
+    const d = items.filter(s => status[s.id]).length;
     const yf = document.querySelector(`[data-yf="${y}"]`), yb = document.querySelector(`[data-yb="${y}"]`);
-    if(yf) yf.textContent = `${done}/${items.length} aprobadas`;
-    if(yb) yb.style.width = Math.round(done/items.length*100) + '%';
+    if(yf) yf.textContent = `${d}/${items.length} aprobadas`;
+    if(yb) yb.style.width = Math.round(d/items.length*100) + '%';
   }
+
+  document.querySelectorAll('#flt .fbtn').forEach(b => {
+    const k = b.dataset.state;
+    b.setAttribute('aria-pressed', String(stateFilter===k));
+    b.querySelector('.cnt').textContent = k==='' ? total : count(k);
+  });
+
+  const acaTotal = aca.reduce((a,x) => a + x.cred, 0);
+  $('acaCardNums').textContent = `${acaTotal} / ${ACA_GOAL} créditos`;
+  $('acaCardBar').style.width = Math.min(100, Math.round(acaTotal/ACA_GOAL*100)) + '%';
 }
 
-function chipHtml(id){
+/* ---------- Panel de detalle ---------- */
+function chipHtml(id, cls, stText){
   const s = byId[id];
-  return `<button type="button" class="rchip c-${s.campo}" data-act="go" data-id="${id}">
-    <span class="rn">${pad(id)}</span><span>${esc(s.name)}</span>${status[id]==='aprobada' ? '<span class="rk" aria-label="aprobada">✓</span>' : ''}
+  return `<button type="button" class="${cls}" data-act="go" data-id="${id}">
+    <span class="rn">${pad(id)}</span>
+    <span class="rtxt"><span class="rname">${esc(s.name)}</span><span class="rst">${esc(stText)}</span></span>
   </button>`;
 }
 
-function renderDetail(){
+function renderDetail(freed){
   const el = $('detail');
   const ae = document.activeElement;
   const fk = (ae && ae.dataset && el.contains(ae)) ? ae.dataset.fk : null;
@@ -486,23 +594,136 @@ function renderDetail(){
   } else if(selectedId===null){
     html = null; // sin selección, el panel de detalle no se muestra
   } else {
-    const s = byId[selectedId], st = status[selectedId] || '';
-    const {reqs, unlocks} = relIds(selectedId);
+    const id = selectedId, s = byId[id], st = status[id] || '', k = kindOf(id);
+    const rq = reqsOf(id), ul = unlOf(id), miss = missingOf(id).length;
+    const selDone = !!st;
+    let avTitle, avText;
+    if(k==='ap'){ avTitle = 'Aprobada'; avText = 'Ya cuenta para las materias que la tienen como previa.'; }
+    else if(k==='fin'){ avTitle = 'En final'; avText = 'Cuenta como aprobada: ya libera las materias que dependen de ella.'; }
+    else if(k==='libre'){ avTitle = 'Habilitada'; avText = rq.length ? 'Tenés todas las previas aprobadas. Ya podés cursarla.' : 'No tiene previas. Podés cursarla desde el inicio.'; }
+    else { avTitle = 'Bloqueada'; avText = `Te ${miss===1 ? 'falta 1 previa' : 'faltan ' + miss + ' previas'} por aprobar (${rq.length - miss} de ${rq.length} listas).`; }
+    const segs = k==='bloq' ? `<span class="segs" aria-hidden="true">${rq.map(r => `<i class="${status[r] ? 'on' : ''}"></i>`).join('')}</span>` : '';
+
+    const reqChips = rq.map(r => {
+      const sr = status[r];
+      return chipHtml(r, 'rchip c-' + byId[r].campo + (sr ? '' : ' miss'),
+        sr==='aprobada' ? '✓ Aprobada' : sr==='final' ? '✓ En final: ya cuenta como aprobada' : 'Falta aprobarla');
+    }).join('');
+
+    const unlChips = ul.map(u => {
+      const ku = kindOf(u);
+      let cls = 'rchip c-' + byId[u].campo, txt;
+      if(!selDone && freed && freed.includes(u)){ cls += ' free'; txt = 'Se libera al aprobar'; }
+      else if(!selDone && !status[u]){
+        const others = missingOf(u).filter(r => r!==id).length;
+        cls += ' wait'; txt = `Aún le ${others===1 ? 'falta 1 previa más' : 'faltan ' + others + ' previas más'}`;
+      }
+      else if(ku==='ap') txt = '✓ Aprobada';
+      else if(ku==='fin') txt = 'En final';
+      else if(ku==='libre'){ cls += ' free'; txt = 'Habilitada'; }
+      else { cls += ' wait'; txt = `Bloqueada: faltan ${missingOf(u).length}`; }
+      return chipHtml(u, cls, txt);
+    }).join('');
+
     const sb = (v, label) => `<button type="button" data-act="status" data-v="${v}" data-fk="st-${v||'p'}" aria-pressed="${st===v}">${label}</button>`;
     html = `<div class="d-main">
         <span class="d-code">UC-${pad(s.id)} · Año ${yearOf(s)} · Cuat. ${cuatOf(s)}</span>
         <h2 tabindex="-1">${esc(s.name)}</h2>
         <span class="d-pill c-${s.campo}">${CAMPOS[s.campo]}</span>
+        <div class="av ${k}">
+          <span class="avt">${icon(k, 18, 2.4)}${avTitle}</span>
+          <span class="avd">${avText}</span>
+          ${segs}
+        </div>
         <div class="sb3" role="group" aria-label="Estado de la materia">${sb('', 'Pendiente')}${sb('final', 'En final')}${sb('aprobada', 'Aprobada')}</div>
       </div>
       <div class="d-rel">
-        <div class="rel-col"><h3>Requiere</h3>${reqs.length ? reqs.map(chipHtml).join('') : '<span class="none">Sin previas cargadas.</span>'}</div>
-        <div class="rel-col"><h3>Habilita</h3>${unlocks.length ? unlocks.map(chipHtml).join('') : '<span class="none">No habilita otras materias.</span>'}</div>
+        <div class="rel-col"><h3>Requiere</h3>${reqChips || '<span class="none">Sin previas: se puede cursar desde el inicio.</span>'}</div>
+        <div class="rel-col"><h3>${selDone ? 'Habilita' : 'Al aprobarla se liberan'}</h3>${unlChips || '<span class="none">No habilita otras materias.</span>'}</div>
       </div>`;
   }
   el.hidden = (html === null);
   el.innerHTML = html === null ? '' : html;
   if(fk){ const n = el.querySelector(`[data-fk="${fk}"]`); if(n) n.focus(); }
+}
+
+/* ---------- Flexible (ACA) ---------- */
+function renderAca(){
+  const box = $('acaBox');
+  if(!box) return;
+  const ae = document.activeElement;
+  const fk = (ae && ae.dataset && box.contains(ae)) ? ae.dataset.fk : null;
+  const total = aca.reduce((a,x) => a + x.cred, 0);
+  const pct = Math.min(100, Math.round(total/ACA_GOAL*100));
+  const statusTxt = total >= ACA_GOAL ? `Completaste los ${ACA_GOAL} créditos` : `Te faltan ${ACA_GOAL - total} créditos`;
+  const items = aca.map(x => `<div class="aca-item">
+      <span class="aca-nm">${esc(x.name)}</span><span class="aca-cr">${x.cred} créd.</span>
+      <button type="button" class="aca-del" data-aca="del" data-id="${x.id}" data-fk="del${x.id}" aria-label="Quitar ${esc(x.name)}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>
+      </button></div>`).join('');
+  const form = acaFormOpen
+    ? `<div class="aca-form">
+        <label for="acaName">Nombre de la actividad</label>
+        <input id="acaName" type="text" maxlength="120" placeholder="Ej.: Curso de inglés técnico" value="${esc(acaDraft.name)}" data-fk="acaName">
+        <span class="lbl2" id="acaCredLbl">Créditos</span>
+        <div class="stepper" role="group" aria-labelledby="acaCredLbl">
+          <button type="button" data-aca="dec" data-fk="dec" aria-label="Restar un crédito">−</button>
+          <span class="step-n" aria-live="polite">${acaDraft.cred}</span>
+          <button type="button" data-aca="inc" data-fk="inc" aria-label="Sumar un crédito">+</button>
+        </div>
+        <div class="mrow">
+          <button type="button" class="btn primary" id="acaSave" data-aca="save" data-fk="save" ${acaDraft.name.trim() ? '' : 'disabled'}>Guardar actividad</button>
+          <button type="button" class="btn" data-aca="cancel" data-fk="cancel">Cancelar</button>
+        </div>
+      </div>`
+    : `<button type="button" class="aca-add" data-aca="open" data-fk="acaopen">+ Registrar actividad</button>`;
+  box.innerHTML = `
+    <div class="aca-h"><b>ACA · Actividades Curriculares Acreditables</b><span>Sin correlatividad: se acreditan a elección a lo largo de la carrera. Registrá acá cada una y sumá sus créditos.</span></div>
+    <div class="aca-prog"><span class="aca-n">${total}<small> / ${ACA_GOAL} créditos</small></span><div class="bar2"><span style="width:${pct}%"></span></div><span class="aca-s">${statusTxt}</span></div>
+    <div class="aca-list">${items || '<span class="none">Todavía no registraste actividades.</span>'}</div>
+    ${form}`;
+  if(fk){ const n = box.querySelector(`[data-fk="${fk}"]`); if(n) n.focus(); }
+}
+
+function resetAcaDraft(){ acaDraft.name = ''; acaDraft.cred = 2; }
+
+function handleAca(btn){
+  const act = btn.dataset.aca;
+  if(act==='open'){
+    acaFormOpen = true; renderAca();
+    const i = $('acaName'); if(i) i.focus();
+  } else if(act==='cancel'){
+    acaFormOpen = false; resetAcaDraft(); renderAca();
+  } else if(act==='inc'){
+    acaDraft.cred = Math.min(ACA_GOAL, acaDraft.cred + 1); renderAca();
+  } else if(act==='dec'){
+    acaDraft.cred = Math.max(1, acaDraft.cred - 1); renderAca();
+  } else if(act==='save'){
+    saveAca();
+  } else if(act==='del'){
+    const id = Number(btn.dataset.id);
+    aca = aca.filter(x => x.id!==id);
+    renderAca(); updateProgress(); saveState();
+    toast('Actividad quitada.');
+  }
+}
+
+function saveAca(){
+  const name = acaDraft.name.trim();
+  if(!name) return;
+  const id = aca.reduce((m,x) => Math.max(m, x.id), 0) + 1;
+  aca.push({id, name, cred: acaDraft.cred});
+  acaFormOpen = false; resetAcaDraft();
+  renderAca(); updateProgress(); saveState();
+  toast('Actividad registrada.');
+  const b = document.querySelector('[data-fk="acaopen"]'); if(b) b.focus();
+}
+
+function sanitizeAca(list){
+  if(!Array.isArray(list)) return [];
+  return list
+    .filter(x => x && typeof x.name==='string' && x.name.trim() && Number.isFinite(Number(x.cred)) && Number(x.cred) > 0)
+    .map((x,i) => ({id: Number.isFinite(Number(x.id)) ? Number(x.id) : i+1, name: x.name.trim(), cred: Number(x.cred)}));
 }
 
 /* ---------- Interacción ---------- */
@@ -574,8 +795,21 @@ function toggleMenu(){
 }
 
 $('board').addEventListener('click', e => {
+  const a = e.target.closest('[data-aca]');
+  if(a){ handleAca(a); return; }
   const t = e.target.closest('.tile');
   if(t) onTileClick(Number(t.dataset.id));
+});
+$('board').addEventListener('input', e => {
+  if(e.target.id==='acaName'){
+    acaDraft.name = e.target.value;
+    const b = $('acaSave'); if(b) b.disabled = !acaDraft.name.trim();
+  }
+});
+$('board').addEventListener('keydown', e => {
+  if(e.target.id!=='acaName') return;
+  if(e.key==='Enter'){ e.preventDefault(); saveAca(); }
+  else if(e.key==='Escape'){ acaFormOpen = false; resetAcaDraft(); renderAca(); const b = document.querySelector('[data-fk="acaopen"]'); if(b) b.focus(); }
 });
 
 $('detail').addEventListener('click', e => {
@@ -587,16 +821,23 @@ $('detail').addEventListener('click', e => {
     selectedId = Number(b.dataset.id);
     update();
     const tile = document.querySelector(`.tile[data-id="${selectedId}"]`);
-    if(tile) tile.scrollIntoView({block:'nearest', behavior:'smooth'});
+    if(tile && tile.scrollIntoView) tile.scrollIntoView({block:'nearest', behavior:'smooth'});
     const h = $('detail').querySelector('h2'); if(h) h.focus({preventScroll:true});
   }
   else if(act==='exitEdit') setEdit(false);
 });
 
 $('cfs').addEventListener('click', e => {
-  const b = e.target.closest('.cf');
+  const b = e.target.closest('.cf[data-campo]');
   if(!b) return;
   campoFilter = (campoFilter===b.dataset.campo) ? '' : b.dataset.campo;
+  update();
+});
+
+$('flt').addEventListener('click', e => {
+  const b = e.target.closest('.fbtn');
+  if(!b) return;
+  stateFilter = b.dataset.state;
   update();
 });
 
@@ -664,7 +905,7 @@ function showSaveStatus(kind){
 async function saveState(){
   clearTimeout(saveTimer);
   saveTimer = setTimeout(async () => {
-    const payload = JSON.stringify({edges, status});
+    const payload = JSON.stringify({edges, status, aca});
     if(storageAvailable){
       showSaveStatus('saving');
       try{
@@ -704,13 +945,15 @@ async function loadState(){
   return null;
 }
 
-window.getLocalState = () => ({edges, status});
+window.getLocalState = () => ({edges, status, aca});
 window.applyCloudState = data => {
   edges = data.edges;
   status = (data.status && typeof data.status==='object') ? data.status : {};
+  aca = sanitizeAca(data.aca);
   selectedId = null; pendingFrom = null;
   update();
-  try{ if(localStorageAvailable) window.localStorage.setItem(LOCAL_KEY, JSON.stringify({edges, status})); }catch(e){}
+  renderAca();
+  try{ if(localStorageAvailable) window.localStorage.setItem(LOCAL_KEY, JSON.stringify({edges, status, aca})); }catch(e){}
 };
 
 async function init(){
@@ -719,9 +962,12 @@ async function init(){
   if(saved && Array.isArray(saved.edges)){
     edges = saved.edges;
     status = (saved.status && typeof saved.status==='object') ? saved.status : {};
+    aca = sanitizeAca(saved.aca);
+    renderAca();
     update();
     toast('Se restauraron tus cambios guardados.');
   } else {
+    renderAca();
     update();
     if(!storageAvailable && !localStorageAvailable) showSaveStatus('unavailable');
   }
@@ -796,7 +1042,9 @@ const firebaseConfig = {
   const errText = e => ERRORES[e && e.code] || ('No se pudo completar la acción (' + ((e && e.code) || 'error') + ').');
 
   const docRef = () => F.doc(db, 'usuarios', user.uid);
-  const snapshot = () => JSON.stringify(window.getLocalState());
+  // Forma canónica del estado (los datos viejos sin "aca" se tratan como lista vacía)
+  const normalize = d => JSON.stringify({ edges: d.edges, status: d.status || {}, aca: Array.isArray(d.aca) ? d.aca : [] });
+  const snapshot = () => normalize(window.getLocalState());
 
   async function pullOrInit() {
     setCloud('Conectando…');
@@ -806,14 +1054,15 @@ const firebaseConfig = {
       if (snap.exists() && typeof snap.data().data === 'string') {
         const remote = JSON.parse(snap.data().data);
         if (Array.isArray(remote.edges)) {
-          const remoteStr = JSON.stringify({ edges: remote.edges, status: remote.status || {} });
+          const remoteStr = normalize(remote);
           if (remoteStr !== local) {
-            const localHasProgress = Object.keys(window.getLocalState().status).length > 0;
+            const ls = window.getLocalState();
+            const localHasProgress = Object.keys(ls.status).length > 0 || ls.aca.length > 0;
             const useRemote = !localHasProgress ||
               confirm('Este dispositivo tiene cambios distintos a los de tu cuenta.\n\nAceptar = usar los de tu cuenta (se reemplaza lo de acá).\nCancelar = subir lo de este dispositivo y reemplazar lo de tu cuenta.');
             if (useRemote) {
               window.applyCloudState(remote);
-              lastSynced = JSON.stringify({ edges: remote.edges, status: remote.status || {} });
+              lastSynced = snapshot();
               setCloud('● Sincronizado');
               return;
             }
