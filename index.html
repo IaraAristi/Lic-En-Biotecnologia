@@ -160,8 +160,6 @@
   .aca{min-height:112px; border:2px dashed var(--line); border-radius:14px; padding:14px; color:var(--muted); font-size:13px;}
   .aca b{display:block; color:var(--ink); font:800 16px 'Manrope',sans-serif; margin-bottom:4px;}
 
-  footer{padding:28px 32px 0; font-size:12px; color:var(--muted); max-width:860px; line-height:1.55;}
-
   /* ---------- Modal de cuenta ---------- */
   .overlay{position:fixed; inset:0; background:var(--scrim); display:none; align-items:flex-start; justify-content:center; padding:96px 16px 16px; z-index:100; overflow-y:auto;}
   .overlay.open{display:flex;}
@@ -181,7 +179,7 @@
   .msg.ok{color:var(--ok-text);}
 
   @media (max-width:640px){
-    .top{padding:14px 16px;} .wrap{padding:16px 16px 0;} .notice{margin:0 16px;} footer{padding:24px 16px 0;}
+    .top{padding:14px 16px;} .wrap{padding:16px 16px 0;} .notice{margin:0 16px;}
     .brand h1{font-size:19px;}
   }
 </style>
@@ -194,7 +192,7 @@
     <div class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <div>
       <h1>Correlativas · Biotecnología</h1>
-      <p>UNAHUR · Plan 2025 · tocá una materia para ver su camino</p>
+      <p>UNAHUR · Plan 2025</p>
     </div>
   </div>
 
@@ -268,10 +266,6 @@
   <div id="board"></div>
 </main>
 
-<footer>
-  Herramienta generada a partir del Anexo del Plan de Estudios de la Licenciatura en Biotecnología (UNAHUR, Res. 000082, 2025).
-  Las conexiones sugeridas son un punto de partida editable, no un documento oficial. Tu progreso se guarda automáticamente en este navegador; iniciá sesión para sincronizarlo entre dispositivos.
-</footer>
 </div>
 
 <div class="toast" id="toast" role="status" hidden></div>
@@ -488,7 +482,7 @@ function renderDetail(){
     html = `<div class="d-empty"><span class="t">Modo edición activo</span>${editHint || 'Elegí dos materias para crear o quitar una conexión entre ellas.'}
       <div style="margin-top:12px"><button type="button" class="btn" data-act="exitEdit" data-fk="exit">Salir del modo edición</button></div></div>`;
   } else if(selectedId===null){
-    html = `<div class="d-empty"><span class="t">Elegí una materia del mapa</span>Se atenúa todo lo que no esté conectado con ella: las previas y las que habilita quedan resaltadas. Los filtros de arriba también atenúan por campo de formación.</div>`;
+    html = null; // sin selección, el panel de detalle no se muestra
   } else {
     const s = byId[selectedId], st = status[selectedId] || '';
     const {reqs, unlocks} = relIds(selectedId);
@@ -504,7 +498,8 @@ function renderDetail(){
         <div class="rel-col"><h3>Habilita</h3>${unlocks.length ? unlocks.map(chipHtml).join('') : '<span class="none">No habilita otras materias.</span>'}</div>
       </div>`;
   }
-  el.innerHTML = html;
+  el.hidden = (html === null);
+  el.innerHTML = html === null ? '' : html;
   if(fk){ const n = el.querySelector(`[data-fk="${fk}"]`); if(n) n.focus(); }
 }
 
